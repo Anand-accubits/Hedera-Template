@@ -23,10 +23,10 @@ async function main() {
 
     // Call createAccountKeys() to generate 5 account keys
     const accountKeys = await createAccountKeys(client, 5);
+
     // Call createAccounts() to create account with a balance of 100 Hbar's
-    const accounts = await createAccounts(client, accountKeys, 100);
     console.log(`Newly Created Accounts are\n`)
-    console.log(accounts);
+    const accounts = await createAccounts(client, accountKeys, 100);
     process.exit();
 }
 
