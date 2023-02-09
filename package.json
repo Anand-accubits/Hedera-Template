@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:generateAccounts": "node scripts/createAccounts.js ",
+    "start:generateAccounts": "node AccountService/scripts/createAccounts.js ",
+    "start:createFile": "node FileService/scripts/fileServices.js ",
+    "start:createToken": "node FungibleTokens/scripts/index.js ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -1,6 +1,5 @@
-const { PrivateKey, AccountCreateTransaction, Hbar, Client, AccountBalanceQuery } = require('@hashgraph/sdk');
-const { createAccountKeys, createAccounts, getClient } = require('../helpers')
-require('dotenv').config()
+const { createAccountKeys, createAccounts, getClient } = require('../../utils/account')
+require('dotenv').config({ path:'AccountService/.env'})
 
 // Grab account id and private key from ENV
 const myAccountId = process.env.MY_ACCOUNT_ID
@@ -11,8 +10,6 @@ if (myAccountId == null ||
     myPrivateKey == null) {
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
 }
-
-
 
 /**
  * Function to create 5 accounts and transfer 

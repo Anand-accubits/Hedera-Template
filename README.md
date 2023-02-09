@@ -41,3 +41,12 @@ here: https://github.com/nvm-sh/nvm.
 Any Integrated Development Environment that supports NodeJS is acceptable. We prefer Visual Studio Code, and provide Run Configurations for VSC.
 
 
+# TASK-1
+
+
+
+## How to Run
+1. cd /AccountService
+2. npm run start:generateAccounts 
+
+## Output
