@@ -60,9 +60,9 @@ const createAccounts = async (client, accountKeys, amount) => {
         accounts[`PublicKey${index + 1}`] = account.publicKey.toString()
         accounts[`AccountId${index + 1}`] = receipt.accountId.toString()
 
-        console.log(`PrivateKey${index + 1} = ${account.privateKey.toString()}`)
-        console.log(`PublicKey${index + 1} = ${account.publicKey.toString()}`)
-        console.log(`AccountId${index + 1} = ${receipt.accountId.toString()}`)
+        console.log(`PRIVATE_KEY_${index + 1} = ${account.privateKey.toString()}`)
+        console.log(`PUBLIC_KEY_${index + 1} = ${account.publicKey.toString()}`)
+        console.log(`ACCOUNT_ID_${index + 1} = ${receipt.accountId.toString()}`)
         console.log('\n')
     }
     return accounts;
