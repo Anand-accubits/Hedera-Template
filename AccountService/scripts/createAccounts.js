@@ -1,5 +1,5 @@
 const { PrivateKey, AccountCreateTransaction, Hbar, Client, AccountBalanceQuery } = require('@hashgraph/sdk');
-const { createAccountKeys, createAccounts } = require('../helpers')
+const { createAccountKeys, createAccounts, getClient } = require('../helpers')
 require('dotenv').config()
 
 // Grab account id and private key from ENV
@@ -12,14 +12,14 @@ if (myAccountId == null ||
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
 }
 
-// Connect with Hedera
-const client = Client.forTestnet();
-client.setOperator(myAccountId, myPrivateKey)
+
 
 /**
  * Function to create 5 accounts and transfer 
  */
 async function main() {
+    // Create CLient Object
+    const client = await getClient(myAccountId, myPrivateKey);
 
     // Call createAccountKeys() to generate 5 account keys
     const accountKeys = await createAccountKeys(client, 5);

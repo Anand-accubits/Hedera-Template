@@ -1,24 +1,11 @@
 const { PrivateKey, AccountCreateTransaction, Hbar, Client, AccountBalanceQuery } = require('@hashgraph/sdk');
-// require('dotenv').config()
 
-// // Grab account id and private key from ENV
-// const myAccountId = process.env.MY_ACCOUNT_ID
-// const myPrivateKey = process.env.MY_PRIVATE_KEY
-
-// // If weren't able to grab it, should throw a new error
-// if (myAccountId == null ||
-//     myPrivateKey == null) {
-//     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
-// }
-
-// // Connect with Hedera
-// const client = Client.forTestnet();
-// client.setOperator(myAccountId, myPrivateKey)
-
-/**
- * 
- * Function Generate Account Keys
- */
+const getClient = async (accountId, privateKey) => {
+    // Connect with Hedera
+    const client = Client.forTestnet();
+    client.setOperator(accountId, privateKey)
+    return client;
+}
 /**
  * 
  * @param {Object} client 
@@ -68,5 +55,6 @@ const createAccounts = async (client, accountKeys, amount) => {
     return accounts;
 }
 
+exports.getClient = (accountId, privateKey) => getClient(accountId, privateKey)
 exports.createAccountKeys = (client, counts) => createAccountKeys(client, counts)
 exports.createAccounts = (client, accountKeys, amount) => createAccounts(client, accountKeys, amount)
