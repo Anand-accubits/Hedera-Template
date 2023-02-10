@@ -7,7 +7,10 @@
     "start:generateAccounts": "node AccountService/scripts/createAccounts.js ",
     "start:createFile": "node FileService/scripts/fileServices.js ",
     "start:createToken": "node FungibleTokens/scripts/index.js ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:nonFungibleToken": "node NonFungibleTokens/scripts/index.js ",
+    "start:deployContract": "node Smart-Contract-Service/scripts/index.js ",
+    "start:createscheduledtx": "node Scheduled_TX/scripts/createScheduledTx.js",
+    "start:multiSignature": "node MultiSig/scripts/multSignature.js"
   },
   "keywords": [],
   "author": "",

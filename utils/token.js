@@ -6,7 +6,8 @@ const {
     AccountBalanceQuery, PrivateKey, Wallet,
     TokenMintTransaction,
     TokenUpdateTransaction,
-    TokenBurnTransaction
+    TokenBurnTransaction,
+    TransferTransaction
 } = require("@hashgraph/sdk");
 require('dotenv').config();
 
@@ -156,6 +157,22 @@ const tokenBalance = async (client, accountId, tokenId) => {
 
     // console.log("The balance of the user is: " + tokenBalance.tokens.get(tokenId));
     return tokenBalance.tokens.get(tokenId);
+}
+
+exports.sendToken = async (client, tokenId, owner, aliasAccountId, sendBalance, treasuryAccPvKey) => {
+    const tokenTransferTx = new TransferTransaction()
+        .addTokenTransfer(tokenId, owner, -sendBalance)
+        .addTokenTransfer(tokenId, aliasAccountId, sendBalance)
+        .freezeWith(client);
+
+    // Sign the transaction with the operator key
+    let tokenTransferTxSign = await tokenTransferTx.sign(treasuryAccPvKey);
+
+    // Submit the transaction to the Hedera network
+    let tokenTransferSubmit = await tokenTransferTxSign.execute(client);
+    // Get transaction receipt information
+    await tokenTransferSubmit.getReceipt(client);
+    console.log("Send Token: The transaction consensus status " + transactionStatus.toString());
 }
 
 // 1. PAUSE

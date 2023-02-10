@@ -1,17 +1,18 @@
 const {
     Wallet,
     LocalProvider,
-    Client
+    Client,
+    PrngTransaction
 } = require('@hashgraph/sdk');
 
-const getClient = async (accountId, privateKey) => {
+exports.getClient = async (accountId, privateKey) => {
     // Connect with Hedera
     const client = Client.forTestnet();
     client.setOperator(accountId, privateKey)
     return client;
 }
 
-const getWallet = async (accountId, privateKey) => {
+exports.getWallet = async (accountId, privateKey) => {
     return new Wallet(
         accountId,
         privateKey,
@@ -19,5 +20,19 @@ const getWallet = async (accountId, privateKey) => {
     );
 }
 
-exports.getClient = (accountId, privateKey) => getClient(accountId, privateKey)
-exports.getWallet = (accountId, privateKey) => getWallet(accountId, privateKey)
+exports.generateRandom = async (client, range) => {
+    //Create the transaction with range set
+    const transaction = await new PrngTransaction()
+        //Set the range
+        .setRange(range)
+        .execute(client);
+
+    //Get the record
+    const transactionRecord = await transaction.getRecord(client);
+
+    //Get the number
+    const prngNumber = transactionRecord.prngNumber;
+
+    console.log('Random Number Generated is: ', prngNumber);
+    return prngNumber;
+}

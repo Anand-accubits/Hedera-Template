@@ -30,7 +30,7 @@ const createAccountKeys = async (client, counts) => {
 /**
  * Function to create 5 accounts and transfer 
  */
-const createAccounts = async (client, accountKeys, amount) => {
+const createAccounts = async (client, accountKeys, initialBalance) => {
     // const accountKeys = await createAccountKeys(5);
     const accounts = {}
 
@@ -38,7 +38,7 @@ const createAccounts = async (client, accountKeys, amount) => {
         const account = accountKeys[index];
         const createAccountTx = await new AccountCreateTransaction()
             .setKey(account.publicKey)
-            .setInitialBalance(new Hbar(amount))
+            .setInitialBalance(new Hbar(initialBalance))
             .execute(client);
 
         const receipt = await createAccountTx.getReceipt(client);
